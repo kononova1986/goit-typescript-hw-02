@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-family: 400;
+  font-size: 14px;
+  font-style: normal;
+  background-color: #fafafa;
+  margin: 0 auto;
+  min-width: 320px;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    min-width: 734px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    min-width: 1170px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+header {
+  background-color: rgb(63, 82, 248);
+  padding: 20px 0;
+}
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+li {
+  list-style-type: none;
+}

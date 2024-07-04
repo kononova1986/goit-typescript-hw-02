@@ -1,0 +1,17 @@
+.loadMore {
+    display: flex;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background-color: rgb(63, 82, 248);
+    color: white;
+}
+.loadMore:hover {
+    background-color: rgb(4, 27, 241);
+}
+
+.loadMoreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
