@@ -14,6 +14,8 @@ export default function App() {
   const [error, setError] = useState(false);
   const [img, setImg] = useState('');
   const [page, setPage] = useState(1);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [dataImage, setDataImage] = useState({});
 
   async function handleSubmit(newImg) {
     setImages([]);
@@ -47,14 +49,25 @@ export default function App() {
     newPage();
   }, [img, page]);
 
+  const toggleModalOpen = () => {
+    setIsOpen(prevImage => !prevImage);
+  };
   return (
     <>
       <SearchBar onSearch={handleSubmit} />
-      <ImageGallery images={images} />
+      <ImageGallery
+        images={images}
+        openModal={toggleModalOpen}
+        setDataImage={setDataImage}
+      />
       {loading && <RotatingLines />}
       {error && <ErrorMessage />}
-      {images.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
-      <ImageModal images={images} />
+      {images && images.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
+      <ImageModal
+        modalIsOpen={modalIsOpen}
+        images={dataImage}
+        closeModal={toggleModalOpen}
+      />
     </>
   );
 }

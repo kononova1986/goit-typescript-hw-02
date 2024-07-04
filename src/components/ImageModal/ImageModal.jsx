@@ -1,10 +1,8 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
+import css from './ImageModal.module.css';
 
 const customStyles = {
   content: {
-    width: '80%',
-    height: '80%',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -14,39 +12,22 @@ const customStyles = {
   },
 };
 
-export default function ImageModal({ images }) {
-  //   const {
-  //     description,
-  //     urls: { full },
-  //   } = images;
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+export default function ImageModal({ images, modalIsOpen, closeModal }) {
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        className={css.Modal}
+        overlayClassName={css.Overlay}
       >
-        <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>x</button>
-        <img src={images.full} alt={images.description} />
+        <img
+          className={css.ModalImg}
+          src={images?.urls?.regular}
+          alt={images?.alt_description}
+        />
       </Modal>
     </div>
   );
