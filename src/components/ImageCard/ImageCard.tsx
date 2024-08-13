@@ -1,4 +1,14 @@
-export default function ImageCard({ images, modalOpened, setDataImage }) {
+import { ImgPhoto } from '../../App';
+interface ImageCardProps {
+  images: ImgPhoto;
+  modalOpened: () => void;
+  setDataImage: (data: ImgPhoto) => void;
+}
+const ImageCard: React.FC<ImageCardProps> = ({
+  images,
+  modalOpened,
+  setDataImage,
+}) => {
   const {
     alt_description,
     urls: { small },
@@ -18,4 +28,5 @@ export default function ImageCard({ images, modalOpened, setDataImage }) {
       />
     </div>
   );
-}
+};
+export default ImageCard;

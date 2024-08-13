@@ -1,23 +1,33 @@
 import ImageGallery from './components/ImageGallery/ImageGallery.jsx';
-import SearchBar from './components/SearchBar/SearchBar';
-import RotatingLines from './components/Loader/Loader';
-import ErrorMessage from './components/ErrorMessage/ErrorMessage';
-import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
+import SearchBar from './components/SearchBar/SearchBar.jsx';
+import RotatingLines from './components/Loader/Loader.jsx';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage.jsx';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 
 import FetchImage from '../image-api.js';
 import { useState, useEffect } from 'react';
 import ImageModal from './components/ImageModal/ImageModal.jsx';
-
+export interface ImgPhoto {
+  id: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+  alt_description: string;
+}
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [img, setImg] = useState('');
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [dataImage, setDataImage] = useState({});
-
-  async function handleSubmit(newImg) {
+  const [images, setImages] = useState<ImgPhoto[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [img, setImg] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [dataImage, setDataImage] = useState<ImgPhoto>({
+    id: '',
+    urls: { small: '', regular: '' },
+    alt_description: '',
+  });
+  async function handleSubmit(newImg: string) {
     setImages([]);
     setPage(1);
     setImg(newImg);
@@ -49,7 +59,7 @@ export default function App() {
     newPage();
   }, [img, page]);
 
-  const toggleModalOpen = () => {
+  const toggleModalOpen = (): void => {
     setIsOpen(prevImage => !prevImage);
   };
   return (

@@ -1,6 +1,7 @@
 import { IoSearchOutline } from 'react-icons/io5';
 import css from './SearchBar.module.css';
 import toast, { Toaster } from 'react-hot-toast';
+import { FormEvent } from 'react';
 
 const notify = () =>
   toast.error('Fill in the fields', {
@@ -8,16 +9,20 @@ const notify = () =>
     position: 'top-right',
     style: { width: '200px' },
   });
-
-export default function SearchBar({ onSearch }) {
-  const handleSubmit = evt => {
+interface SearchBarProps {
+  onSearch: (data: string) => Promise<void>;
+}
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const form = evt.target;
-    const imgSerche = form.elements.img.value;
-    if (form.elements.img.value.trim() === '') {
+    const form = evt.target as HTMLFormElement;
+    const imgSearch = (form.elements.namedItem('img') as HTMLInputElement)
+      .value;
+
+    if (imgSearch.trim() === '') {
       return notify();
     }
-    onSearch(imgSerche);
+    onSearch(imgSearch);
     form.reset();
   };
 
@@ -28,8 +33,6 @@ export default function SearchBar({ onSearch }) {
           className={css.formInput}
           type="text"
           name="img"
-          // autocomplete="off"
-          // autofocus
           placeholder="Search images and photos"
         />
 
@@ -46,4 +49,5 @@ export default function SearchBar({ onSearch }) {
       </form>
     </header>
   );
-}
+};
+export default SearchBar;

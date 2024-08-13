@@ -11,8 +11,23 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
-
-export default function ImageModal({ images, modalIsOpen, closeModal }) {
+type ImageModal = {
+  id: string;
+  urls: {
+    regular: string;
+  };
+  alt_description: string;
+};
+interface ImageModalProps {
+  images: ImageModal;
+  modalIsOpen: boolean;
+  closeModal: () => void;
+}
+const ImageModal: React.FC<ImageModalProps> = ({
+  images,
+  modalIsOpen,
+  closeModal,
+}) => {
   return (
     <div>
       <Modal
@@ -25,10 +40,11 @@ export default function ImageModal({ images, modalIsOpen, closeModal }) {
       >
         <img
           className={css.ModalImg}
-          src={images?.urls?.regular}
-          alt={images?.alt_description}
+          src={images.urls.regular}
+          alt={images.alt_description}
         />
       </Modal>
     </div>
   );
-}
+};
+export default ImageModal;
