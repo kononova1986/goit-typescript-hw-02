@@ -7,14 +7,7 @@ import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 import FetchImage from '../image-api.js';
 import { useState, useEffect } from 'react';
 import ImageModal from './components/ImageModal/ImageModal.jsx';
-export interface ImgPhoto {
-  id: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-  alt_description: string;
-}
+import { ImgPhoto } from '../image-api.js';
 export default function App() {
   const [images, setImages] = useState<ImgPhoto[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,10 +38,10 @@ export default function App() {
       try {
         setError(false);
         setLoading(true);
-        const data = await FetchImage(img, page);
-        console.log('🚀 ~ newPage ~ data:', data);
+        const data: any = await FetchImage(img, page);
+        console.log('🚀 ~ newPage ~ data:', data.results);
         setImages(prevImage => {
-          return [...prevImage, ...data];
+          return [...prevImage, ...data.results];
         });
       } catch (error) {
         setError(true);
@@ -58,7 +51,6 @@ export default function App() {
     }
     newPage();
   }, [img, page]);
-
   const toggleModalOpen = (): void => {
     setIsOpen(prevImage => !prevImage);
   };

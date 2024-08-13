@@ -1,4 +1,4 @@
-import { ImgPhoto } from '../../App';
+import { ImgPhoto } from '../../../image-api';
 interface ImageCardProps {
   images: ImgPhoto;
   modalOpened: () => void;
